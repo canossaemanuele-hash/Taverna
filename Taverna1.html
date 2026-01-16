@@ -2,16 +2,17 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taverna Priscilla - Preview Reale</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Taverna Priscilla - Ultra Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .tavolo { transition: all 0.2s; cursor: pointer; }
-        .occupato { background-color: #475569 !important; cursor: not-allowed; opacity: 0.6; }
         .tab-active { background-color: #eab308 !important; color: black !important; font-weight: bold; }
-        .zona-label { border-left: 3px solid #eab308; padding-left: 8px; margin-bottom: 12px; margin-top: 20px; }
         .sezione-contenuto { display: none; }
         .sezione-contenuto.active { display: block; }
+        .img-viewer { width: 100%; height: 100%; overflow: auto; display: flex; align-items: flex-start; justify-content: center; background: black; }
+        .img-viewer img { max-width: none; width: 200%; height: auto; }
+        .vip-gold { background: linear-gradient(145deg, #fef3c7, #f59e0b) !important; color: black !important; border: 2px solid #b45309 !important; }
     </style>
 </head>
 <body class="bg-slate-900 text-white font-sans pb-10">
@@ -22,176 +23,148 @@
 
     <main class="p-4 max-w-md mx-auto">
         
-        <div class="flex justify-between mb-6 bg-slate-800 p-1 rounded-xl border border-slate-700 text-[10px] uppercase">
+        <div id="nav-main" class="flex justify-between mb-6 bg-slate-800 p-1 rounded-xl border border-slate-700 text-[10px] uppercase font-bold text-center">
             <button onclick="switchView('cliente')" id="btn-cliente" class="flex-1 py-3 rounded-lg tab-active">Prenota</button>
             <button onclick="switchView('pr')" id="btn-pr" class="flex-1 py-3 rounded-lg">PR Junior</button>
             <button onclick="switchView('capo')" id="btn-capo" class="flex-1 py-3 rounded-lg text-red-400">Direzione</button>
         </div>
 
         <div id="sezione-cliente" class="sezione-contenuto active">
-            
-            <button onclick="toggleMappa(true)" class="w-full mb-6 py-3 bg-slate-800 border border-yellow-500/50 rounded-xl text-yellow-500 text-xs font-bold uppercase flex items-center justify-center gap-2 shadow-lg">
-                📍 Vedi Posizione Tavoli (Mappa)
-            </button>
+            <button onclick="toggleMappa(true)" class="w-full mb-6 py-4 bg-slate-800 border border-yellow-500/50 rounded-xl text-yellow-500 text-xs font-bold uppercase flex items-center justify-center gap-2">📍 PIANTINA HD</button>
 
-            <div class="zona-label"><h2 class="text-sm font-bold uppercase text-yellow-500">Privé Priscilla <span class="text-[10px] font-normal text-slate-500">(Min. 30€/testa)</span></h2></div>
-            <div class="grid grid-cols-3 gap-3">
+            <div class="border-l-2 border-yellow-500 pl-2 mb-4"><h2 class="text-yellow-500 font-bold uppercase text-sm">Privé Priscilla</h2></div>
+            <div class="grid grid-cols-3 gap-3 mb-8">
                 <div onclick="selectTavolo('1', 450, 'Privé')" class="tavolo h-12 bg-yellow-600 rounded-lg flex items-center justify-center font-bold text-xs border border-yellow-400">T 1</div>
                 <div onclick="selectTavolo('2', 450, 'Privé')" class="tavolo h-12 bg-yellow-600 rounded-lg flex items-center justify-center font-bold text-xs border border-yellow-400">T 2</div>
                 <div onclick="selectTavolo('12', 400, 'Privé')" class="tavolo h-12 bg-yellow-600 rounded-lg flex items-center justify-center font-bold text-xs border border-yellow-400">T 12</div>
             </div>
 
-            <div class="zona-label"><h2 class="text-sm font-bold uppercase text-slate-200">Zona Pista <span class="text-[10px] font-normal text-slate-500">(Min. 30€/testa)</span></h2></div>
+            <div class="border-l-2 border-green-500 pl-2 mb-4"><h2 class="text-green-500 font-bold uppercase text-sm">Zona Pista</h2></div>
             <div class="grid grid-cols-3 gap-3">
-                <div onclick="selectTavolo('3', 300, 'Pista')" class="tavolo h-12 bg-green-500 rounded-lg flex items-center justify-center font-bold text-xs">T 3</div>
-                <div onclick="selectTavolo('4', 300, 'Pista')" class="tavolo h-12 bg-green-500 rounded-lg flex items-center justify-center font-bold text-xs">T 4</div>
-                <div onclick="selectTavolo('5', 300, 'Pista')" class="tavolo h-12 bg-green-500 rounded-lg flex items-center justify-center font-bold text-xs">T 5</div>
-                <div onclick="selectTavolo('6', 300, 'Pista')" class="tavolo h-12 bg-green-500 rounded-lg flex items-center justify-center font-bold text-xs">T 6</div>
-                <div onclick="selectTavolo('7', 300, 'Pista')" class="tavolo h-12 bg-green-500 rounded-lg flex items-center justify-center font-bold text-xs">T 7</div>
-                <div onclick="selectTavolo('8', 300, 'Pista')" class="tavolo h-12 bg-green-500 rounded-lg flex items-center justify-center font-bold text-xs">T 8</div>
-                <div onclick="selectTavolo('9', 300, 'Pista')" class="tavolo h-12 bg-green-500 rounded-lg flex items-center justify-center font-bold text-xs">T 9</div>
-                <div onclick="selectTavolo('10', 300, 'Pista')" class="tavolo h-12 bg-green-500 rounded-lg flex items-center justify-center font-bold text-xs">T 10</div>
-                <div onclick="selectTavolo('11', 300, 'Pista')" class="tavolo h-12 bg-green-500 rounded-lg flex items-center justify-center font-bold text-xs text-black shadow-inner opacity-80">T 11</div>
-            </div>
-
-            <div class="zona-label"><h2 class="text-sm font-bold uppercase text-slate-400">Fuori Pista <span class="text-[10px] font-normal text-slate-500">(Min. 30€/testa)</span></h2></div>
-            <div class="grid grid-cols-4 gap-2">
-                <script>
-                    for(let i=13; i<=27; i++) {
-                        document.write(`<div onclick="selectTavolo('${i}', 150, 'Fuori Pista')" class="tavolo h-10 bg-slate-700 rounded-md flex items-center justify-center font-bold text-[10px]">T ${i}</div>`);
-                    }
-                </script>
+                <script>for(let i=3; i<=11; i++) { document.write(`<div onclick="selectTavolo('${i}', 300, 'Pista')" class="tavolo h-12 bg-green-500 rounded-lg flex items-center justify-center font-bold text-xs">T ${i}</div>`); }</script>
             </div>
         </div>
 
-        <div id="modal-mappa" class="hidden fixed inset-0 bg-black/90 z-[200] p-4 flex flex-col items-center justify-center">
-            <h3 class="text-yellow-500 font-bold mb-4 uppercase tracking-widest text-sm">Piantina Taverna Priscilla</h3>
-            <div class="bg-white p-2 rounded-lg">
-                <img src="https://i.postimg.cc/Hr9MCwfV/Hr9-MCwf-V.jpg" class="max-w-full max-h-[70vh] rounded shadow-2xl" alt="Mappa">
-            </div>
-            <button onclick="toggleMappa(false)" class="mt-8 px-8 py-3 bg-yellow-500 text-black font-black rounded-full uppercase text-sm shadow-xl">Chiudi</button>
-        </div>
-
-        <div id="sezione-pr" class="sezione-contenuto space-y-4 pt-2">
-            <div class="grid grid-cols-2 gap-3">
-                <div class="bg-blue-900/20 border border-blue-500/50 p-4 rounded-xl text-center">
-                    <p class="text-[9px] text-blue-400 uppercase font-bold mb-1">Stasera (Provv.)</p>
-                    <p class="text-2xl font-bold text-white">€ 45,00</p>
-                </div>
-                <div class="bg-slate-800 border border-slate-700 p-4 rounded-xl text-center">
-                    <p class="text-[9px] text-slate-400 uppercase font-bold mb-1">Totale Storico</p>
-                    <p class="text-2xl font-bold text-blue-400">€ 1.840,00</p>
-                </div>
-            </div>
-            <button onclick="alert('Link PR Copiato!')" class="w-full py-4 bg-blue-600 text-white rounded-xl text-xs font-bold uppercase shadow-lg">Copia Link Personale</button>
-        </div>
-
-        <div id="sezione-capo" class="sezione-contenuto space-y-4 pt-2">
-            <div class="grid grid-cols-2 gap-3">
-                <div class="bg-red-900/30 border border-red-500/50 p-4 rounded-xl text-center">
-                    <p class="text-[9px] text-red-400 uppercase font-bold mb-1">Tua Provv. (10%)</p>
-                    <p class="text-2xl font-bold text-white">€ 1.200</p>
-                </div>
-                <div class="bg-slate-800 border border-slate-700 p-4 rounded-xl text-center">
-                    <p class="text-[9px] text-slate-400 uppercase font-bold mb-1">Incasso Totale</p>
-                    <p class="text-2xl font-bold text-yellow-500">€ 14.500</p>
-                </div>
+        <div id="sezione-pr" class="sezione-contenuto space-y-4">
+            <div class="bg-blue-900/20 border border-blue-500/50 p-6 rounded-2xl text-center">
+                <p class="text-[10px] text-blue-400 uppercase font-bold">Provvigioni stasera</p>
+                <p class="text-4xl font-black">€ 45,00</p>
             </div>
             <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
-                <p class="text-[10px] text-slate-500 mb-3 uppercase font-bold">Performance Staff</p>
+                <p class="text-[10px] uppercase font-bold text-slate-500 mb-3">Prenotazioni attive (2)</p>
                 <div class="space-y-2 text-xs">
-                    <div class="flex justify-between border-b border-slate-700 pb-1"><span>Direzione</span><span class="text-yellow-500 font-bold">€ 12.000</span></div>
-                    <div class="flex justify-between text-slate-400"><span>PR Marco</span><span>€ 1.500</span></div>
-                    <div class="flex justify-between text-slate-400"><span>PR Giulia</span><span>€ 1.000</span></div>
+                    <div class="flex justify-between p-2 bg-slate-900 rounded"><span>Tavolo 5 - Luca M.</span><span class="text-blue-400 font-bold">€ 30</span></div>
+                    <div class="flex justify-between p-2 bg-slate-900 rounded"><span>Tavolo 15 - Sara B.</span><span class="text-blue-400 font-bold">€ 15</span></div>
+                </div>
+            </div>
+            <button onclick="alert('Link Copiato!')" class="w-full py-4 bg-blue-600 rounded-xl font-bold uppercase text-xs">Copia Link PR</button>
+        </div>
+
+        <div id="sezione-capo" class="sezione-contenuto space-y-4">
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-red-900/30 p-4 rounded-xl text-center border border-red-500/50"><p class="text-[9px] text-red-400 uppercase">Tua Provv.</p><p class="text-xl font-bold text-white">€ 1.200</p></div>
+                <div class="bg-slate-800 p-4 rounded-xl text-center border border-slate-700"><p class="text-[9px] text-slate-400 uppercase">Totale Locale</p><p class="text-xl font-bold text-yellow-500">€ 14.500</p></div>
+            </div>
+
+            <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+                <h3 class="text-[10px] uppercase font-bold text-yellow-500 mb-3">🍸 Monitor Bar (In tempo reale)</h3>
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center text-[10px] p-2 bg-black rounded">
+                        <div><p class="font-bold text-white text-xs">TAVOLO 1 (Privé)</p><p class="text-slate-400 uppercase">2x Belvedere, 1x Moët</p></div>
+                        <span class="bg-yellow-500 text-black px-2 py-1 rounded font-black">DA PREPARARE</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+                <p class="text-[10px] font-bold mb-3 uppercase text-slate-500">Performance Staff</p>
+                <div class="space-y-2 text-xs">
+                    <div class="flex justify-between border-b border-slate-700 pb-1"><span>1. Direzione</span><span class="text-yellow-500 font-bold">€ 12.000</span></div>
+                    <div class="flex justify-between text-slate-400"><span>2. PR Marco</span><span>€ 1.500</span></div>
+                    <div class="flex justify-between text-slate-400"><span>3. PR Giulia</span><span>€ 1.000</span></div>
                 </div>
             </div>
         </div>
 
-        <div id="details" class="hidden fixed bottom-0 left-0 right-0 bg-slate-800 p-6 rounded-t-3xl border-t-2 border-yellow-500 z-50 shadow-2xl">
+        <div id="details" class="hidden fixed bottom-0 left-0 right-0 bg-slate-800 p-6 rounded-t-3xl border-t-2 border-yellow-500 z-[60]">
             <div class="flex justify-between items-center mb-6">
-                <div>
-                    <h3 class="font-extrabold text-2xl text-white" id="det-nome">Tavolo</h3>
-                    <p class="text-slate-400 text-xs italic" id="det-info"></p>
-                </div>
-                <div class="text-right">
-                    <p class="text-yellow-500 text-2xl font-black" id="det-prezzo">0€</p>
-                </div>
+                <div><h3 class="font-black text-2xl" id="det-nome">Tavolo</h3><p class="text-slate-400 text-xs italic" id="det-info"></p></div>
+                <div class="text-right"><p class="text-yellow-500 text-2xl font-black" id="det-prezzo">0€</p></div>
             </div>
-            <div class="space-y-3">
-                <button onclick="openCheckout()" class="w-full bg-yellow-500 text-black font-black py-4 rounded-xl uppercase text-sm">Paga Tutto Subito</button>
-                <button onclick="alert('Link Split-Pay generato!')" class="w-full bg-slate-700 text-white font-bold py-3 rounded-xl text-xs uppercase border border-slate-600 font-mono tracking-tighter italic">Dividi Spesa tra amici</button>
-                <button onclick="document.getElementById('details').classList.add('hidden')" class="w-full text-slate-500 text-[10px] uppercase py-2 underline">Indietro</button>
-            </div>
+            <button onclick="openCheckout()" class="w-full bg-yellow-500 text-black font-black py-4 rounded-xl uppercase text-sm mb-3">Prenota ora</button>
+            <button onclick="alert('Link Split generato!')" class="w-full bg-slate-700 text-white font-bold py-3 rounded-xl text-xs uppercase border border-slate-600 mb-3">Dividi con amici</button>
+            <button onclick="document.getElementById('details').classList.add('hidden')" class="w-full text-slate-500 text-[10px] uppercase py-2">Annulla</button>
         </div>
 
         <div id="checkout-view" class="hidden fixed inset-0 bg-slate-900 z-[100] p-6 overflow-y-auto">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-xl font-black uppercase">Listino Tavolo</h2>
-                <button onclick="closeCheckout()" class="text-slate-400 uppercase text-[10px] border border-slate-700 px-3 py-1 rounded">Torna alla mappa</button>
+            <div class="flex justify-between items-center mb-6"><h2 class="text-xl font-black uppercase">Ordine Bevande</h2><button onclick="closeCheckout()" class="text-slate-500 text-xs">Indietro</button></div>
+            <div class="bg-yellow-500/10 border border-yellow-500/30 p-4 rounded-xl mb-6 text-center"><p class="text-[9px] uppercase text-yellow-500 font-bold">Credito Incluso</p><p id="budget-display" class="text-4xl font-black text-yellow-500">€ 0</p></div>
+            <div class="mb-6">
+                <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Orario di consegna al tavolo:</p>
+                <select id="ora-servizio" class="w-full bg-slate-800 border border-slate-700 p-3 rounded-lg text-sm text-yellow-500 font-bold outline-none">
+                    <option>00:00 (Check-in)</option><option>00:30</option><option>01:00</option><option>01:30</option><option>02:00</option>
+                </select>
             </div>
-            <div class="bg-yellow-500/10 border border-yellow-500/30 p-4 rounded-xl mb-8 text-center">
-                <p class="text-[10px] uppercase text-yellow-500 font-bold mb-1">Budget Credito Disponibile</p>
-                <p id="budget-display" class="text-4xl font-black text-yellow-500">€ 0</p>
+            <div class="space-y-3 mb-10">
+                <div class="bg-slate-800 p-4 rounded-xl flex justify-between items-center border border-slate-700"><div><p class="font-bold text-sm">Belvedere 0.7L</p><p class="text-xs text-slate-500">€ 150</p></div><button onclick="addDrink('Belvedere 0.7L')" class="bg-yellow-500 text-black px-3 py-1 rounded font-black text-[10px]">ADD</button></div>
+                <div class="bg-slate-800 p-4 rounded-xl flex justify-between items-center border border-slate-700"><div><p class="font-bold text-sm">Moët & Chandon</p><p class="text-xs text-slate-500">€ 130</p></div><button onclick="addDrink('Moët & Chandon')" class="bg-yellow-500 text-black px-3 py-1 rounded font-black text-[10px]">ADD</button></div>
             </div>
-            <div class="space-y-4">
-                <div class="bg-slate-800 p-4 rounded-xl flex justify-between items-center border border-slate-700">
-                    <div><p class="font-bold text-sm">Vodka Belvedere 0.7L</p><p class="text-xs text-slate-500">€ 150,00</p></div>
-                    <button class="bg-yellow-500 text-black px-3 py-1 rounded-lg font-black text-[10px] uppercase">Aggiungi</button>
+            <button onclick="showFinalReceipt()" class="w-full bg-green-600 text-white font-black py-4 rounded-xl uppercase">Paga e Ricevi Pass</button>
+        </div>
+
+        <div id="receipt-view" class="hidden fixed inset-0 bg-slate-900 z-[200] p-6 flex flex-col items-center overflow-y-auto">
+            <div id="ticket-color" class="w-full max-w-sm bg-white text-black rounded-3xl p-8 shadow-2xl mt-10 relative">
+                <div class="text-center mb-6"><h2 class="text-2xl font-black uppercase tracking-tighter" id="rec-tipo">Pass Tavolo</h2><p class="text-[10px] text-slate-500 uppercase font-bold">Taverna Priscilla</p></div>
+                <div class="border-y-2 border-dashed border-slate-200 py-6 my-6 space-y-4">
+                    <div class="flex justify-between"><span class="text-slate-500 text-xs font-bold uppercase">Tavolo</span><span class="font-black text-xl" id="rec-tavolo">--</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500 text-xs font-bold uppercase">Consegna Bar</span><span class="font-bold text-blue-600 uppercase text-xs" id="rec-ora">--</span></div>
+                    <div class="pt-4 border-t border-slate-100"><p id="rec-bevande" class="text-xs font-bold italic">Nessuna bevanda selezionata</p></div>
                 </div>
-                <div class="bg-slate-800 p-4 rounded-xl flex justify-between items-center border border-slate-700">
-                    <div><p class="font-bold text-sm">Gin Hendrick's</p><p class="text-xs text-slate-500">€ 120,00</p></div>
-                    <button class="bg-yellow-500 text-black px-3 py-1 rounded-lg font-black text-[10px] uppercase">Aggiungi</button>
-                </div>
-                <div class="bg-slate-800 p-4 rounded-xl flex justify-between items-center border border-slate-700">
-                    <div><p class="font-bold text-sm">Moët & Chandon</p><p class="text-xs text-slate-500">€ 130,00</p></div>
-                    <button class="bg-yellow-500 text-black px-3 py-1 rounded-lg font-black text-[10px] uppercase">Aggiungi</button>
-                </div>
+                <div class="flex justify-center mb-6"><div class="w-32 h-32 bg-slate-100 rounded-xl flex items-center justify-center border-2 border-slate-200 text-[10px] text-slate-400 font-bold uppercase">QR Code</div></div>
+                <button onclick="alert('Chiamata inviata al cameriere!')" class="w-full bg-black text-white py-3 rounded-xl font-bold text-[10px] uppercase mb-2">🆘 CHIAMA CAMERIERE</button>
+                <button onclick="alert('Segnalazione inviata alla sicurezza.')" class="w-full border-2 border-black text-black py-2 rounded-xl font-bold text-[9px] uppercase">⚠️ AIUTO SICUREZZA</button>
             </div>
-            <button onclick="alert('Pagamento Ricevuto! Il tuo tavolo alla Taverna è confermato.')" class="w-full bg-green-600 text-white font-black py-4 rounded-xl mt-12 uppercase shadow-xl shadow-green-900/20">Conferma Ordine e Paga</button>
+            <button onclick="location.reload()" class="mt-8 text-white border-b border-white text-[10px] uppercase font-bold">Torna alla home</button>
+        </div>
+
+        <div id="modal-mappa" class="hidden fixed inset-0 bg-black z-[200] flex flex-col">
+            <div class="p-4 flex justify-between items-center bg-slate-900"><span class="text-yellow-500 font-bold text-[10px]">MAPPA TAVERNA HD</span><button onclick="toggleMappa(false)" class="bg-white text-black px-4 py-1 rounded text-xs font-black uppercase">Chiudi</button></div>
+            <div class="flex-1 img-viewer"><img src="https://i.postimg.cc/8zqmMw4B/Image-6.jpg"></div>
         </div>
 
     </main>
 
     <script>
-        let currentPrice = 0;
-
-        function toggleMappa(show) {
-            document.getElementById('modal-mappa').classList.toggle('hidden', !show);
-        }
-
+        let currentPrice = 0; let selectedTavolo = ""; let selectedZona = ""; let selectedDrinks = [];
+        function toggleMappa(show) { document.getElementById('modal-mappa').classList.toggle('hidden', !show); }
         function switchView(mode) {
             document.querySelectorAll('.tab-active').forEach(e => e.classList.remove('tab-active'));
             document.querySelectorAll('.sezione-contenuto').forEach(e => e.classList.remove('active'));
             document.getElementById('details').classList.add('hidden');
-
-            if(mode === 'cliente') {
-                document.getElementById('btn-cliente').classList.add('tab-active');
-                document.getElementById('sezione-cliente').classList.add('active');
-            } else if(mode === 'pr') {
-                document.getElementById('btn-pr').classList.add('tab-active');
-                document.getElementById('sezione-pr').classList.add('active');
-            } else if(mode === 'capo') {
-                document.getElementById('btn-capo').classList.add('tab-active');
-                document.getElementById('sezione-capo').classList.add('active');
-            }
+            if(mode === 'cliente') { document.getElementById('btn-cliente').classList.add('tab-active'); document.getElementById('sezione-cliente').classList.add('active'); }
+            else if(mode === 'pr') { document.getElementById('btn-pr').classList.add('tab-active'); document.getElementById('sezione-pr').classList.add('active'); }
+            else if(mode === 'capo') { document.getElementById('btn-capo').classList.add('tab-active'); document.getElementById('sezione-capo').classList.add('active'); }
         }
-
         function selectTavolo(id, prezzo, zona) {
-            currentPrice = prezzo;
+            currentPrice = prezzo; selectedTavolo = id; selectedZona = zona;
             document.getElementById('details').classList.remove('hidden');
             document.getElementById('det-nome').innerText = "Tavolo " + id;
-            document.getElementById('det-info').innerText = "Zona " + zona;
+            document.getElementById('det-info').innerText = zona + " (Min. 30€/testa)";
             document.getElementById('det-prezzo').innerText = prezzo + "€";
         }
-
-        function openCheckout() {
-            document.getElementById('checkout-view').classList.remove('hidden');
-            document.getElementById('budget-display').innerText = "€ " + currentPrice;
+        function openCheckout() { document.getElementById('checkout-view').classList.remove('hidden'); document.getElementById('budget-display').innerText = "€ " + currentPrice; }
+        function addDrink(name) { selectedDrinks.push(name); alert(name + " aggiunto!"); }
+        function showFinalReceipt() {
+            document.getElementById('checkout-view').classList.add('hidden'); document.getElementById('receipt-view').classList.remove('hidden'); document.getElementById('nav-main').classList.add('hidden');
+            document.getElementById('rec-tavolo').innerText = "Tavolo " + selectedTavolo;
+            document.getElementById('rec-ora').innerText = document.getElementById('ora-servizio').value;
+            if(selectedDrinks.length > 0) { document.getElementById('rec-bevande').innerText = "BOTTIGLIE: " + selectedDrinks.join(", "); }
+            if(selectedZona === "Privé") {
+                document.getElementById('ticket-color').classList.add('vip-gold');
+                document.getElementById('rec-tipo').innerText = "💎 VIP PASS";
+            }
         }
-
-        function closeCheckout() {
-            document.getElementById('checkout-view').classList.add('hidden');
-        }
+        function closeCheckout() { document.getElementById('checkout-view').classList.add('hidden'); selectedDrinks = []; }
     </script>
 </body>
 </html>
